@@ -1,4 +1,4 @@
-desc:JS Plugin: "It WILL Fuzz !!!"
+desc:JS Plugin: "It WILL Fuzz"
 version:    1.0.3
 author:     William Sant Ana
 tags:       processing fuzz sharpened
@@ -18,22 +18,14 @@ about:
   A first-order high-pass filter (~140 Hz) is applied:
   Removes excessive low-frequency energy
   Prevents intermodulation distortion and “mud” in the fuzz stage
-  Improves note definition, especially for low-register instruments (bass guitar !)
+  Improves note definition, especially for low-register instruments (bass guitar !!!)
 
   The core distortion is generated using an arctangent waveshaper:
   Produces soft saturation characteristic of germanium circuits
-  Generates predominantly odd and even harmonics
-  Includes additional amplitude-dependent compression for smoother clipping
+  with predominantly odd and even harmonics and additional 
+  amplitude-dependent compression for smoother clipping
 
   The tone stage is implemented as a dual-band filter blend: Tone Shaping (Big Muff-style Network)
-
-  Key Characteristics
-    Germanium-style soft clipping (smooth, compressed, musical)
-    Pre-distortion low-end control (tight, defined response)
-    Analog-like instability via stochastic modulation
-    Big Muff-inspired tone shaping with mid scoop
-    Stable output with limiter protection
-    Parallel processing capability
 
 
 slider1:inputGain=5.3<0.1,10,0.1>Gain
@@ -41,7 +33,7 @@ slider2:drive=10<0,20,0.5>Drive
 slider3:outputGain=0.5<0,2,0.01>Output
 slider4:mix=1<0,1,0.01>Mix/Blend
 slider5:volatility=0.5<0,1,0.01>Tone
-slider6:preset=0<0,5,1{It Will Fuzz,Zvex Fuzz Factory,EHX Big Muff PI,EarthQuaker Erupter,Dunlop Fuzz Face,Vox Tone Bender,Shin-ei Super Fuzz,Dr. Scientific Bit Quest,Fulltone OctaFuzz,JHS Muffuletta,Malekko Omicron,Wampler Velvet Fuzz}>Preset
+slider6:preset=0<0,5,1{It WILL Fuzz,Zvex Fuzz Factory,EHX Big Muff PI,EarthQuaker Erupter,Dunlop Fuzz Face,Vox Tone Bender,Shin-ei Super Fuzz,Dr. Scientific Bit Quest,Fulltone OctaFuzz,JHS Muffuletta,Malekko Omicron,Wampler Velvet Fuzz}>Preset
 
 @init
 // Filtro high-pass (remove graves excessivos antes da distorção. Botei em 140hz por padrão, abaixo disso embola)
@@ -65,7 +57,7 @@ preset != last_preset ? (
 
   last_preset = preset;
 
-  preset == 0 ? ( // It Will Fuzz (MUITOOO GANHO, Muito molho, Muito grave)
+  preset == 0 ? ( // It WILL Fuzz (MUITOOO GANHO, Muito molho, Muito grave)
     inputGain = 5.3;
     drive = 20;
     outputGain = 0.5;
@@ -230,7 +222,8 @@ loop(num_ch,
   // Mistura progressiva entre limpo e distorcido
   shaped_signal = clean_reference + (saturated - clean_reference) * drive;
 
-  // Pequena variação para simular imperfeições analógicas (sempre com a tangenta hiperbolica....aprendi isso e é magica pura)
+  // Pequena variação para simular imperfeições analógicas 
+  // (sempre com a tangenta hiperbolica....aprendi isso e é magica pura)
   textured = shaped_signal * (1 + noise_smooth * 0.1);
   textured += noise_smooth * 0.05;
   textured = atan(textured);
