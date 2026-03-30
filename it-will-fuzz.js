@@ -36,11 +36,12 @@ about:
     Parallel processing capability
 
 
-slider1:inputGain=1<0.1,10,0.1>Gain
+slider1:inputGain=5.3<0.1,10,0.1>Gain
 slider2:drive=10<0,20,0.5>Drive
 slider3:outputGain=0.5<0,2,0.01>Output
 slider4:mix=1<0,1,0.01>Mix/Blend
 slider5:volatility=0.5<0,1,0.01>Tone
+slider6:preset=0<0,5,1{It Will Fuzz,Zvex Fuzz Factory,EHX Big Muff PI,EarthQuaker Erupter,Dunlop Fuzz Face,Vox Tone Bender,Shin-ei Super Fuzz,Dr. Scientific Bit Quest,Fulltone OctaFuzz,JHS Muffuletta,Malekko Omicron,Wampler Velvet Fuzz}>Preset
 
 @init
 // Filtro high-pass (remove graves excessivos antes da distorção. Botei em 140hz por padrão, abaixo disso embola)
@@ -57,6 +58,116 @@ hp2_state = 0;
 noise_phase = 0;
 noise_sample = 0;
 noise_smooth = 0;
+last_preset = 0;
+
+@slider
+preset != last_preset ? (
+
+  last_preset = preset;
+
+  preset == 0 ? ( // It Will Fuzz (MUITOOO GANHO, Muito molho, Muito grave)
+    inputGain = 5.3;
+    drive = 20;
+    outputGain = 0.5;
+    mix = 1;
+    volatility = 0;
+  );
+  
+  preset == 1 ? ( // Zvex Fuzz Factory (instável, agressivo)
+    inputGain = 7.0;
+    drive = 18;
+    outputGain = 0.35;
+    mix = 1;
+    volatility = 0.75;
+  );
+  
+  preset == 2 ? ( // EHX Big Muff Pi (clássico, gordo, mid scoop)
+    inputGain = 5.5;
+    drive = 17;
+    outputGain = 0.40;
+    mix = 1;
+    volatility = 0.35;
+  );
+  
+  preset == 3 ? ( // EarthQuaker Erupter (fuzz direto, sem tone)
+    inputGain = 6.5;
+    drive = 20;
+    outputGain = 0.32;
+    mix = 1;
+    volatility = 0.25;
+  );
+  
+  preset == 4 ? ( // Dunlop Fuzz Face (germanium feel)
+    inputGain = 4.2;
+    drive = 12;
+    outputGain = 0.50;
+    mix = 1;
+    volatility = 0.45;
+  );
+  
+  preset == 5 ? ( // Vox Tone Bender (mais médio/agressivo)
+    inputGain = 5.8;
+    drive = 15;
+    outputGain = 0.42;
+    mix = 1;
+    volatility = 0.55;
+  );
+  
+  preset == 6 ? ( // Shin-ei Super Fuzz (rasgado + scooped)
+    inputGain = 6.2;
+    drive = 19;
+    outputGain = 0.34;
+    mix = 1;
+    volatility = 0.65;
+  );
+  
+  preset == 7 ? ( // Dr. Scientific BitQuest (quase glitch/lofi)
+    inputGain = 7.5;
+    drive = 20;
+    outputGain = 0.30;
+    mix = 1;
+    volatility = 0.9;
+  );
+  
+  preset == 8 ? ( // Fulltone OctaFuzz (harmônicos fortes)
+    inputGain = 6.0;
+    drive = 18;
+    outputGain = 0.36;
+    mix = 1;
+    volatility = 0.7;
+  );
+  
+  preset == 9 ? ( // JHS Muffuletta (muff moderno equilibrado)
+    inputGain = 5.2;
+    drive = 16;
+    outputGain = 0.45;
+    mix = 1;
+    volatility = 0.4;
+  );
+  
+  preset == 10 ? ( // Malekko Omicron (tight e moderno)
+    inputGain = 4.8;
+    drive = 14;
+    outputGain = 0.48;
+    mix = 1;
+    volatility = 0.6;
+  );
+  
+  preset == 11 ? ( // Wampler Velvet Fuzz (suave, quase distortion)
+    inputGain = 3.8;
+    drive = 10;
+    outputGain = 0.55;
+    mix = 1;
+    volatility = 0.5;
+  );
+  
+  // atualiza UI
+  sliderchange(inputGain);
+  sliderchange(drive);
+  sliderchange(outputGain);
+  sliderchange(mix);
+  sliderchange(volatility);  
+)
 
 @sample
 channel = 0;
