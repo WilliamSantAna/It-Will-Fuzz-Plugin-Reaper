@@ -1,4 +1,4 @@
-desc:JS Plugin: "It WILL Fuzz"
+desc:It WILL Fuzz
 version:    1.0.3
 author:     William Sant Ana
 tags:       processing fuzz sharpened
@@ -18,14 +18,22 @@ about:
   A first-order high-pass filter (~140 Hz) is applied:
   Removes excessive low-frequency energy
   Prevents intermodulation distortion and “mud” in the fuzz stage
-  Improves note definition, especially for low-register instruments (bass guitar !!!)
+  Improves note definition, especially for low-register instruments (bass guitar !)
 
   The core distortion is generated using an arctangent waveshaper:
   Produces soft saturation characteristic of germanium circuits
-  with predominantly odd and even harmonics and additional 
-  amplitude-dependent compression for smoother clipping
+  Generates predominantly odd and even harmonics
+  Includes additional amplitude-dependent compression for smoother clipping
 
   The tone stage is implemented as a dual-band filter blend: Tone Shaping (Big Muff-style Network)
+
+  Key Characteristics
+    Germanium-style soft clipping (smooth, compressed, musical)
+    Pre-distortion low-end control (tight, defined response)
+    Analog-like instability via stochastic modulation
+    Big Muff-inspired tone shaping with mid scoop
+    Stable output with limiter protection
+    Parallel processing capability
 
 
 slider1:inputGain=5.3<0.1,10,0.1>Gain
